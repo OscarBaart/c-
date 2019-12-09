@@ -1,27 +1,16 @@
-class battery : private component
-{
+#include <iomanip>
+#include <iostream>
+#include <vector>
+#include "Components.h"
+
+using namespace std;
+
+class Circuit {
+    private:
+    vector<Component*> circuitComponents; 
+
     public:
-        string name;
-        float voltage;
+    Cercuit();
+    ~Cercuit();
 
-};
-
-class resistor
-{
-    public:
-        string name;
-        float resistance;
-};
-
-class capacitor
-{
-    public:
-        string name;
-        float storage;
-};
-
-class component {
-    protected:
-        char p;
-        char n;
 };
