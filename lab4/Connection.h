@@ -5,4 +5,4 @@ class Connection {
     Connection();
     double charge;
     ~Connection();
-}
+};

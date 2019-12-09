@@ -10,7 +10,7 @@ class Circuit {
     vector<Component*> circuitComponents; 
 
     public:
-    Cercuit();
-    ~Cercuit();
+    Circuit();
+    ~Circuit();
 
 };

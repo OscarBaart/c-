@@ -11,9 +11,10 @@ protected:
     Connection* right;
 
 public:
-    Component(String const _name, Connection *const _left, Connection *const _right);
-    virtual void Update(double const _timeStep);
-    virtual void getCurrent();
+    Component(string const _name, Connection *const _left, Connection *const _right);
+    virtual void update(double const _timeStep);
+    virtual double getCurrent();
+    double getVoltage();
     ~Component();
 };
 class Battery : public Component
@@ -22,9 +23,9 @@ private:
     double const voltage;
 
     public:
-    Battery(string const _name, Connection* const _left. Connection* const _right, double const _voltage);
-    void Update(double const _timeStep);
-    void getCurrent();
+    Battery(string const _name, Connection* const _left, Connection* const _right, double const _voltage);
+    void update(double const _timeStep);
+    double getCurrent();
     ~Battery();
 };
 
@@ -34,9 +35,9 @@ private:
     double const resistance;
 
     public:
-    Resistor(string const _name, Connection* const _left. Connection* const _right, double const _resistance);
-    void Update(double const _timeStep);
-    void getCurrent();
+    Resistor(string const _name, Connection* const _left, Connection* const _right, double const _resistance);
+    void update(double const _timeStep);
+    double getCurrent();
     ~Resistor();
 };
 
@@ -47,8 +48,8 @@ private:
     double storedATM;
 
     public:
-    Capacitor(string const _name, Connection* const _left. Connection* const _right, double const _storage, double storedATM );
-    void Update(double const _timeStep);
-    void getCurrent();
+    Capacitor(string const _name, Connection* const _left, Connection* const _right, double const _storage, double storedATM );
+    void update(double const _timeStep);
+    double getCurrent();
     ~Capacitor();
 };

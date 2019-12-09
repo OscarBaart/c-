@@ -1,4 +1,4 @@
-#include "circuit.h"
+#include "Circuit.h"
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -11,10 +11,10 @@ Component::Component(string const _name, Connection* const _left, Connection* co
     }
 
 // Virtual functions
-void Component::Update(double const _timeStep){};
+void Component::update(double const _timeStep){};
 double Component::getCurrent(){};
 
-
+#include "Circuit.h"
 double Component::getVoltage(){
 
 }
@@ -25,29 +25,29 @@ Component::~Component() {
 
 
 // BATTERY
-Battery::Battery(string const _name, Connection* const _left. Connection* const _right, double const _voltage)
+Battery::Battery(string const _name, Connection* const _left, Connection* const _right, double const _voltage)
     : Component(_name, _left, _right), voltage{_voltage} {
     }
 
-void Battery::Update(double const _timeStep) {
+void Battery::update(double const _timeStep) {
     left->charge = voltage;
     right->charge = 0;
 }
 
 double Battery::getCurrent() {
-    return 0
+    return 0;
 }
 
-Battery::~() {
+Battery::~Battery() {
 }
 
 
 // RESISTOR
-Resistor::Resistor(string const _name, Connection* const _left. Connection* const _right, double const _voltage)
+Resistor::Resistor(string const _name, Connection* const _left, Connection* const _right, double const _resistance)
     : Component(_name, _left, _right), resistance{_resistance} {
     }
 
-void Resistor::Update(double const _timeStep) {
+void Resistor::update(double const _timeStep) {
     double potential{left->charge - right->charge};
     double change{potential / resistance * _timeStep};
     left->charge += change;
@@ -63,16 +63,16 @@ Resistor::~Resistor() {
 
 
 // CAPACITOR
-Capacitor::Capacitor(string const _name, Connection* const _left. Connection* const _right,  double const _storage, double storedATM)
+Capacitor::Capacitor(string const _name, Connection* const _left, Connection* const _right,  double const _storage, double storedATM)
     : Component(_name, _left, _right), storage{_storage}, storedATM{storedATM} {
     }
 
-void Capacitor::Update(double const _timeStep) {
+void Capacitor::update(double const _timeStep) {
     
 }
 
 double Capacitor::getCurrent() {
-    return 
+    return 0;
 }
 
 Capacitor::~Capacitor() {

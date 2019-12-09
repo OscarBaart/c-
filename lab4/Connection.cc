@@ -1,7 +1,7 @@
-#incude "Connection.h"
+#include "Connection.h"
 
 Connection::Connection()
-    : Charge{0} {
+    : charge{0} {
 }
 
 Connection::~Connection(){
