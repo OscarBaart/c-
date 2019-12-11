@@ -15,7 +15,8 @@ void Component::update(double const _timeStep){};
 double Component::getCurrent(){};
 
 double Component::getVoltage(){
-    return volt(in->charge - out->charge);
+    volt = (in->charge - out->charge);
+    return volt;
 }
 
 Component::~Component() {
@@ -48,9 +49,14 @@ Resistor::Resistor(string const _name, Connection* const _in, Connection* const 
 
 void Resistor::update(double const _timeStep) {
     double potential{in->charge - out->charge};
-    double change{potential / resistance * _timeStep};
-    in->charge += change;
-    out->charge -= change;
+    double change{(potential / resistance) * _timeStep};
+    if(in > out) {
+        in->charge -= change;
+        out->charge += change;
+    } else {
+        out->charge -= change;
+        in->charge += change;
+    }
 }
 
 double Resistor::getCurrent() {

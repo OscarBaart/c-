@@ -3,16 +3,13 @@
 #include <string>
 #include "Connection.h"
 
-
-
-
-
 class Component
 {
 protected:
     std::string name;
     Connection* in;
     Connection* out;
+    double volt;
 
 public:
     Component(std::string const _name, Connection *const _in, Connection *const _out);
