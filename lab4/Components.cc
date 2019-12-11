@@ -48,12 +48,14 @@ Resistor::Resistor(string const _name, Connection* const _in, Connection* const 
     }
 
 void Resistor::update(double const _timeStep) {
-    double potential{in->charge - out->charge};
-    double change{(potential / resistance) * _timeStep};
-    if(in > out) {
+    if(in->charge > out->charge) {
+        double potential{in->charge - out->charge};
+        double change{(potential / resistance) * _timeStep};
         in->charge -= change;
         out->charge += change;
     } else {
+        double potential{out->charge - in->charge};
+        double change{(potential / resistance) * _timeStep};
         out->charge -= change;
         in->charge += change;
     }

@@ -12,7 +12,7 @@ void circuit1()
     circ.add(new Resistor("R2", &b, &c, 6.0));
     circ.add(new Resistor("R3", &c, &d, 6.0));
     circ.add(new Resistor("R4", &b, &d, 6.0));
-    circ.simulate(10, 10, 0.1);
+    circ.simulate(20000, 10, 0.01);
 }
 
 int main(int argc, char** argv) {
