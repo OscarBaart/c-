@@ -6,17 +6,16 @@ using namespace std;
 
 
 // COMPONENT
-Component::Component(string const _name, Connection* const _left, Connection* const _right)
-    : name{_name}, left{_left}, right{_right} {
+Component::Component(string const _name, Connection* const _in, Connection* const _out)
+    : name{_name}, in{_in}, out{_out} {
     }
 
 // Virtual functions
 void Component::update(double const _timeStep){};
 double Component::getCurrent(){};
 
-#include "Circuit.h"
 double Component::getVoltage(){
-
+    return volt(in->charge - out->charge);
 }
 
 Component::~Component() {
@@ -25,13 +24,13 @@ Component::~Component() {
 
 
 // BATTERY
-Battery::Battery(string const _name, Connection* const _left, Connection* const _right, double const _voltage)
-    : Component(_name, _left, _right), voltage{_voltage} {
+Battery::Battery(string const _name, Connection* const _in, Connection* const _out, double const _voltage)
+    : Component(_name, _in, _out), voltage{_voltage} {
     }
 
 void Battery::update(double const _timeStep) {
-    left->charge = voltage;
-    right->charge = 0;
+    in->charge = voltage;
+    out->charge = 0;
 }
 
 double Battery::getCurrent() {
@@ -43,15 +42,15 @@ Battery::~Battery() {
 
 
 // RESISTOR
-Resistor::Resistor(string const _name, Connection* const _left, Connection* const _right, double const _resistance)
-    : Component(_name, _left, _right), resistance{_resistance} {
+Resistor::Resistor(string const _name, Connection* const _in, Connection* const _out, double const _resistance)
+    : Component(_name, _in, _out), resistance{_resistance} {
     }
 
 void Resistor::update(double const _timeStep) {
-    double potential{left->charge - right->charge};
+    double potential{in->charge - out->charge};
     double change{potential / resistance * _timeStep};
-    left->charge += change;
-    right->charge -= change;
+    in->charge += change;
+    out->charge -= change;
 }
 
 double Resistor::getCurrent() {
@@ -63,16 +62,26 @@ Resistor::~Resistor() {
 
 
 // CAPACITOR
-Capacitor::Capacitor(string const _name, Connection* const _left, Connection* const _right,  double const _storage, double storedATM)
-    : Component(_name, _left, _right), storage{_storage}, storedATM{storedATM} {
+Capacitor::Capacitor(string const _name, Connection* const _in, Connection* const _out,  double const _storage, double _storedATM)
+    : Component(_name, _in, _out), storage{_storage}, storedATM{_storedATM} {
     }
 
 void Capacitor::update(double const _timeStep) {
-    
+    double potential{in->charge - out->charge};
+    double change{storage * (potential - storedATM) * _timeStep};
+    if(in > out) {
+        in->charge -= change;
+        out->charge += change;
+        storedATM += change;
+    } else {
+        out->charge -= change;
+        in->charge += change;
+        storedATM += change;
+    }
 }
 
 double Capacitor::getCurrent() {
-    return 0;
+    return storage*(getVoltage()-storedATM);
 }
 
 Capacitor::~Capacitor() {

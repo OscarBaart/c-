@@ -1,17 +1,21 @@
+#ifndef COMPONENTS_H
+#define COMPONENTS_H
 #include <string>
 #include "Connection.h"
-using namespace std;
+
+
+
 
 
 class Component
 {
 protected:
-    string name;
-    Connection* left;
-    Connection* right;
+    std::string name;
+    Connection* in;
+    Connection* out;
 
 public:
-    Component(string const _name, Connection *const _left, Connection *const _right);
+    Component(std::string const _name, Connection *const _in, Connection *const _out);
     virtual void update(double const _timeStep);
     virtual double getCurrent();
     double getVoltage();
@@ -23,7 +27,7 @@ private:
     double const voltage;
 
     public:
-    Battery(string const _name, Connection* const _left, Connection* const _right, double const _voltage);
+    Battery(std::string const _name, Connection* const _in, Connection* const _out, double const _voltage);
     void update(double const _timeStep);
     double getCurrent();
     ~Battery();
@@ -35,7 +39,7 @@ private:
     double const resistance;
 
     public:
-    Resistor(string const _name, Connection* const _left, Connection* const _right, double const _resistance);
+    Resistor(std::string const _name, Connection* const _in, Connection* const _out, double const _resistance);
     void update(double const _timeStep);
     double getCurrent();
     ~Resistor();
@@ -48,8 +52,9 @@ private:
     double storedATM;
 
     public:
-    Capacitor(string const _name, Connection* const _left, Connection* const _right, double const _storage, double storedATM );
+    Capacitor(std::string const _name, Connection* const _in, Connection* const _out, double const _storage, double _storedATM );
     void update(double const _timeStep);
     double getCurrent();
     ~Capacitor();
 };
+#endif

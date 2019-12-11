@@ -1,3 +1,5 @@
+#ifndef CIRCUIT_H
+#define CIRCUIT_H
 #include <iomanip>
 #include <iostream>
 #include <vector>
@@ -11,6 +13,8 @@ class Circuit {
 
     public:
     Circuit();
+    void simulate(int const, int const, double const)
     ~Circuit();
 
 };
+#endif
