@@ -62,7 +62,7 @@ void Resistor::update(double const _timeStep) {
 }
 
 double Resistor::getCurrent() {
-    return (getVoltage() / 2);
+    return (getVoltage() / resistance);
 }
 
 Resistor::~Resistor() {

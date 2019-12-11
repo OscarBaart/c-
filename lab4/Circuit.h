@@ -13,6 +13,7 @@ class Circuit {
 
     public:
     Circuit();
+    void printFirst();
     void add(Component* const);
     void stepSimulation(double const);
     void printLine();

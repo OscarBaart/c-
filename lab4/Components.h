@@ -6,12 +6,12 @@
 class Component
 {
 protected:
-    std::string name;
     Connection* in;
     Connection* out;
     double volt;
 
 public:
+    std::string name;
     Component(std::string const _name, Connection *const _in, Connection *const _out);
     virtual void update(double const _timeStep);
     virtual double getCurrent();
