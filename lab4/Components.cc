@@ -17,14 +17,11 @@ double Component::getCurrent(){};
 double Component::getVoltage(){
     if(in->charge > out->charge) {
         volt = (in->charge - out->charge);
-    } else {
-        volt = (out->charge - in->charge);
     }
     return volt;
 }
 
 Component::~Component() {
-
 }
 
 
@@ -79,13 +76,15 @@ Capacitor::Capacitor(string const _name, Connection* const _in, Connection* cons
     }
 
 void Capacitor::update(double const _timeStep) {
-    double potential{in->charge - out->charge};
-    double change{storage * (potential - storedATM) * _timeStep};
-    if(in > out) {
+    if(in->charge > out->charge) {
+        double potential{in->charge - out->charge};
+        double change{storage * (potential - storedATM) * _timeStep};
         in->charge -= change;
         out->charge += change;
         storedATM += change;
     } else {
+        double potential{out->charge - in->charge};
+        double change{storage * (potential - storedATM) * _timeStep};
         out->charge -= change;
         in->charge += change;
         storedATM += change;

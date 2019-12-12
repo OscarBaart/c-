@@ -1,4 +1,5 @@
 #include "Circuit.h"
+using namespace std;
 
 Circuit::Circuit()
     : circuitComponents{} {
