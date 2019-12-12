@@ -15,7 +15,11 @@ void Component::update(double const _timeStep){};
 double Component::getCurrent(){};
 
 double Component::getVoltage(){
-    volt = (in->charge - out->charge);
+    if(in->charge > out->charge) {
+        volt = (in->charge - out->charge);
+    } else {
+        volt = (out->charge - in->charge);
+    }
     return volt;
 }
 

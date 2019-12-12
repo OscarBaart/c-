@@ -19,7 +19,6 @@ void Circuit::stepSimulation(double const _timestep)
 
 void Circuit::printLine() 
 {
-
     for (Component* c : circuitComponents){
         cout << fixed << setprecision(2) << setw(6) << c->getVoltage();
         cout << setprecision(2) << setw(6) << c->getCurrent();
