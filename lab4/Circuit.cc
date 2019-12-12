@@ -33,7 +33,6 @@ void Circuit::simulate(int const iteration, int const lines, double const _times
         stepSimulation(_timestep);
         if(i % ((iteration)/(lines))==0) {
             printLine();
-            //count += count;
         }
     }
 }
