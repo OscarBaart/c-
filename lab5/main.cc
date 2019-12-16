@@ -4,11 +4,17 @@
 #include <iterator>
 #include <string>
 #include <vector>
-#include <algorithm> 
+#include <algorithm>
+#include "Clean.h"
 using namespace std;
 
 int main(int argc, char** argv) {
-    ifstream file("example.html.url");
+    Cleaner Cleaner{};
+
+    string fileName{};
+    fileName = argv[1];
+    
+    ifstream file{fileName};
 
     vector<string> stringList;
 
@@ -17,5 +23,13 @@ int main(int argc, char** argv) {
 
     copy(fin_it, eos, back_inserter(stringList));
 
-    cout << "hello world";
-    }
+    auto print = [](const string& word){cout << ' ' << word;};
+    for_each (stringList.begin(), stringList.end(), print);
+    cout << endl;
+
+    Cleaner.listCleaner(stringList);
+
+    Cleaner.printCleanList("-a");
+
+   
+}

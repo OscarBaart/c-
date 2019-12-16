@@ -1,14 +1,24 @@
-#include <list>
+#ifndef _CLEAN_H_
+#define _CLEAN_H_
+
+#include <vector>
 #include <iomanip>
 #include <iostream>
 
 class Cleaner {
     public:
-    std::list<std::string> potential;
-    std::list<std::string> cleaned;
-    void readFile(std::ifstream&);
+    void listCleaner(std::vector<std::string> &);
+    void printCleanList(std::string);
+    ~Cleaner();
 
     private:
-    bool isValid(std::string);
-    void cleanList();
+    void wordCleaner(std::string);
+    void checkWord(std::string);
+    std::vector<std::pair <std::string, int> > cleanList;
+    std::string dirtyWord;
+    std::string cleanWord;
+    int largestWordSize;
+    
 };
+
+#endif
