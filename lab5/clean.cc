@@ -46,7 +46,7 @@ void Cleaner::printFrequency() {
                 {
                     return elem1.second >= elem2.second;
                 };
-                
+
         set<pair<string, int>, Comparator> setOfWords(
             cleanMap.begin(), cleanMap.end(), compFunctor);
 
@@ -70,7 +70,7 @@ void Cleaner::printLimit(int const limit){
     }
     };
     for_each(cleanList.begin(), cleanList.end(), wordPrint);
-    
+    cout << endl;
 }
 
 
