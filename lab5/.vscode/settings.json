@@ -42,6 +42,7 @@
         "limits": "cpp",
         "optional": "cpp",
         "tuple": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "iostream": "cpp"
     }
 }

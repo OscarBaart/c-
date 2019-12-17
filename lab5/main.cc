@@ -12,7 +12,9 @@ int main(int argc, char** argv) {
     Cleaner Cleaner{};
 
     string fileName{};
+    string output{};
     fileName = argv[1];
+    output = argv[2];
     
     ifstream file{fileName};
 
@@ -29,7 +31,7 @@ int main(int argc, char** argv) {
 
     Cleaner.listCleaner(stringList);
 
-    Cleaner.printCleanList("-a");
+    Cleaner.printCleanList(output);
 
    
 }

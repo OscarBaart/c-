@@ -4,6 +4,8 @@
 #include <vector>
 #include <iomanip>
 #include <iostream>
+#include <map>
+
 
 class Cleaner {
     public:
@@ -14,7 +16,10 @@ class Cleaner {
     private:
     void wordCleaner(std::string);
     void checkWord(std::string);
-    std::vector<std::pair <std::string, int> > cleanList;
+    std::vector<std::pair<std::string, int>> listForPrint;
+    std::vector<std::string> cleanList;
+    std::map<std::string, int> cleanMap;
+    std::unordered_map<std::string, std::int> cleanUnorderedMap;
     std::string dirtyWord;
     std::string cleanWord;
     int largestWordSize;

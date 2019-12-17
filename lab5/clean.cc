@@ -5,6 +5,8 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <set>
+#include <functional>
 using namespace std;
 
 void Cleaner::listCleaner (vector<string> &dirtyList){
@@ -15,8 +17,7 @@ void Cleaner::listCleaner (vector<string> &dirtyList){
     
   
     for_each (dirtyList.begin(), dirtyList.end(), [this](string &dirtyWord){ wordCleaner(dirtyWord);});
-
-   
+    for_each (cleanList.begin(), cleanList.end(), [&] (string dirtyWord) {cleanMap[dirtyWord]++;});
 }
 
 void Cleaner::wordCleaner (string dirtyWord){
@@ -35,39 +36,34 @@ void Cleaner::wordCleaner (string dirtyWord){
 
     std::transform(dirtyWord.begin(), dirtyWord.end(), dirtyWord.begin(), ::tolower);
 
-
-    // if (dirtyWord.size() > largestWordSize) {
-    //    largestWordSize = dirtyWord.size();
-    // }
-    //for_each(cleanList.begin(), cleanList.end(), check)
-    checkWord(dirtyWord);
-    //cleanList.push_back(make_pair(dirtyWord, 1);
+    cleanList.push_back(dirtyWord);
 }
 
-void Cleaner::checkWord(string currWord){
-    auto sortList = [this](string currWord) {
-        if(count(cleanList.begin(), cleanList.end(), currWord) > 0) {
-            cleanList[&currWord] = cleanList[&currWord] + 1;
-        } else 
-            cleanList.push_back(make_pair(currWord, 1);
-    }
-
-    for_each(cleanList.begin(), cleanList.end(), sortList)
-}
 
 void Cleaner::printCleanList(string port) {
+        
     if (port == "-a"){
-        std::sort(cleanList.begin(), cleanList.end());
-    }
-    else if (port == "-f"){
-        std::sort(cleanList.begin(), cleanList.end());
-    }
-    auto print = [](const string& word){
-        cout << word << ' ' << endl;
-    };
-    for_each (cleanList.begin(), cleanList.end(), print);
-    cout << endl;
-}
+        auto print = [](const pair<string, int> w){
+           cout << setw(8) << w.first << ' ' << w.second << endl;
+        };
+        for_each (cleanMap.begin(), cleanMap.end(), print);
+    }else if (port == "-f"){
+        typedef function<bool(pair<string, int>, pair<string, int>)> Comparator;
+        Comparator compFunctor = 
+                [](pair<string, int> elem1, pair<string, int> elem2)
+                {
+                    return elem1.second >= elem2.second;
+                };
 
+        set<pair<string, int>, Comparator> setOfWords(
+            cleanMap.begin(), cleanMap.end(), compFunctor);
+
+        for_each (setOfWords.begin(), setOfWords.end(), [&] (const pair<string, int> &w) {
+            cout << w.first << ' ' << w.second << endl;
+        });
+    } else {
+
+    }
+}
 
 Cleaner::~Cleaner() {}
