@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#define SOLUTION 0 // Change to 1 when completely done
+#define SOLUTION 1 // Change to 1 when completely done
 
 int main()
 {
@@ -16,7 +16,7 @@ int main()
   // and convert this code to instantiate it.
   // Move on to the iterator once it compiles.
 
-  List list;
+  List<int> list;
   decltype(list)::value_type number;
   
   cout << "Enter numbers, finish by Ctrl-D " << endl;  

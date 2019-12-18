@@ -57,3 +57,54 @@ List& List::operator=(List&& rhs)
   }
   return *this;
 }
+
+// Iteration functions below
+
+template <class T>
+T& List<T>::tempIterator::operator*() const {
+    return current->data;
+}
+
+template <class T>
+T& List<T>::tempIterator::operator->() const {
+    return current->data;
+}
+
+template <class T>
+void List<T>::tempIterator::setCurrent(Link* _value) {
+    current = _value;
+}
+
+template <class T>
+typename List<T>::tempIterator& List<T>::tempIterator::operator++() {
+    current = current->next;
+    return *this;
+}
+
+template <class T>
+bool List<T>::tempIterator::operator==(tempIterator const& other) const {
+    return other.current = current;
+}
+
+template <class T>
+bool List<T>::tempIterator::operator!=(tempIterator const& other) const {
+    return other.current != current;
+}
+
+template <class T>
+typename List<T>::tempIterator List<T>::begin() const {
+    return tempIterator(first);
+}
+
+template <class T>
+typename List<T>::tempIterator List<T>::end() const {
+    return tempIterator(nullptr);
+}
+
+template <class T>
+std::ostream& operator<<(std::ostream& os, const List<T>& list) {
+    for (auto i : list) {
+        os << i << " ";
+    }
+    return os;
+}

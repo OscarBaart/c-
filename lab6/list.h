@@ -4,28 +4,29 @@
 #include <iostream>
 #include <string>
 
+
 //using Data = std::string;
 
 template<class T>
 class List
 {
 public:
-  List();
+  explicit List();
   ~List() { delete first; }
 
   void insert(T const& d);
   
-  List(List const&);
-  List(List&&); 
-  List& operator=(List const&);
-  List& operator=(List&&);
+  explicit List(List const&);
+  explicit List(List&&); 
+  List<T>& operator=(List const&);
+  List<T>& operator=(List&&);
     
 private:
 
   class Link
   {
   public:
-    Link(Data const& d, Link* n)
+    explicit Link(T const& d, Link* n)
       : data(d), next(n) {}
     ~Link() { delete next; }
     
@@ -43,23 +44,31 @@ private:
   
 public:
 
-  using value_type = Data;
+  using value_type = T;
 
   // Suitable place to add things...
-  class templateIterator
+  class tempIterator
   {
     friend List;
 
     public:
-        bool operator==(templateIterator const& other) const;
-        bool operator!=(templateIterator const& other) const;
+        tempIterator& operator++();
+        bool operator==(tempIterator const& other) const;
+        bool operator!=(tempIterator const& other) const;
         T& operator*() const;
         T& operator->() const;
 
-    private:  
-  }
-  templateIterator begin() const;
-  templateIterator end() const;
+    private: 
+    explicit tempIterator(Link* curr) : current(curr) {}
+    Link* current;
+    void setCurr(Link* data); 
+  };
+  tempIterator begin() const;
+  tempIterator end() const;
+
+  template <class T_EXT>
+  friend std::ostream& operator<<(std::ostream&, List<T_EXT> const&);
+  typedef tempIterator  Iterator;
   
 };
 
