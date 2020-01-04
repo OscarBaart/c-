@@ -2,6 +2,18 @@
 #define COMPONENTS_H
 #include <string>
 #include "Connection.h"
+/*
+Base class should have virtual destructor.
+
+
+Functions that doesn't have a implementation should be pure-virtual. (Empty functions are not ok)
+
+6-4. Use the “virtual” keyword only in your base class. Use “override” in your subclass to shadow a 
+definition in your base class
+
+
+It doesn't compile for me so I wont check any other stuff before you fix that.
+*/
 
 class Component
 {
@@ -16,7 +28,7 @@ public:
     virtual void update(double const _timeStep);
     virtual double getCurrent();
     double getVoltage();
-    ~Component();
+    virtual ~Component();
 };
 class Battery : public Component
 {
@@ -25,9 +37,9 @@ private:
 
     public:
     Battery(std::string const _name, Connection* const _in, Connection* const _out, double const _voltage);
-    void update(double const _timeStep);
-    double getCurrent();
-    ~Battery();
+    void update(double const _timeStep) override;
+    double getCurrent() override;
+    ~Battery() override;
 };
 
 class Resistor : public Component
@@ -37,9 +49,9 @@ private:
 
     public:
     Resistor(std::string const _name, Connection* const _in, Connection* const _out, double const _resistance);
-    void update(double const _timeStep);
-    double getCurrent();
-    ~Resistor();
+    void update(double const _timeStep) override;
+    double getCurrent() override;
+    ~Resistor() override;
 };
 
 class Capacitor : public Component
@@ -50,8 +62,8 @@ private:
 
     public:
     Capacitor(std::string const _name, Connection* const _in, Connection* const _out, double const _storage, double _storedATM );
-    void update(double const _timeStep);
-    double getCurrent();
-    ~Capacitor();
+    void update(double const _timeStep) override;
+    double getCurrent() override;
+    ~Capacitor() override;
 };
 #endif
