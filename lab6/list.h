@@ -55,19 +55,19 @@ public:
         tempIterator& operator++();
         bool operator==(tempIterator const& other) const;
         bool operator!=(tempIterator const& other) const;
-        T& operator*() const;
-        T& operator->() const;
+        T& operator*() ;
+        T& operator->();
 
     private: 
-    explicit tempIterator(Link* curr) : current(curr) {}
+     tempIterator(Link* curr) : current(curr) {}
     Link* current;
     void setCurr(Link* data); 
   };
-  tempIterator begin() const;
-  tempIterator end() const;
+  tempIterator begin();
+  tempIterator end() ;
 
   template <class T_EXT>
-  friend std::ostream& operator<<(std::ostream&, List<T_EXT> const&);
+  friend std::ostream& operator<<(std::ostream&, List<T_EXT> &);
   typedef tempIterator  Iterator;
   
 };

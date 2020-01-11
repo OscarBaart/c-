@@ -78,12 +78,12 @@ bool List<T>::tempIterator::operator!=(tempIterator const& other) const {
 }
 
 template <class T>
-T& List<T>::tempIterator::operator*() const {
+T& List<T>::tempIterator::operator*() {
     return current->data;
 }
 
 template <class T>
-T& List<T>::tempIterator::operator->() const {
+T& List<T>::tempIterator::operator->() {
     return current->data;
 }
 
@@ -94,17 +94,17 @@ void List<T>::tempIterator::setCurr(Link* data) {
 
 
 template <class T>
-typename List<T>::tempIterator List<T>::begin() const {
+typename List<T>::tempIterator List<T>::begin()  {
     return tempIterator(first);
 }
 
 template <class T>
-typename List<T>::tempIterator List<T>::end() const {
+typename List<T>::tempIterator List<T>::end()  {
     return tempIterator(nullptr);
 }
 
 template <class T>
-std::ostream& operator<<(std::ostream& os, const List<T>& list) {
+std::ostream& operator<<(std::ostream& os, List<T>& list) {
     for (auto i : list) {
         os << i << " ";
     }
