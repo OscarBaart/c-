@@ -6,9 +6,9 @@
 
 
 TODO:
---Functions that doesn't have a implementation should be pure-virtual. (Empty functions are not ok)
+--Functions that doesn't have a implementation should be pure-virtual. (Empty functions are not ok) ###DONE
 
-Output doesnt match example
+--Output doesnt match example ##DONE
 
 --You got memory leaks ###DONE
 
@@ -33,7 +33,7 @@ public:
     virtual void update(double const _timeStep) = 0;
     virtual double getCurrent() const = 0;
     virtual double getVoltage() const;
-    virtual ~Component();
+    virtual ~Component() = default;
 };
 class Battery : public Component
 {
@@ -45,7 +45,7 @@ private:
     void update(double const _timeStep) override;
     double getCurrent() const override;
     double getVoltage() const override;
-    ~Battery();
+    ~Battery() = default;
 };
 
 class Resistor : public Component
@@ -57,7 +57,7 @@ private:
     Resistor(std::string const _name, Connection* const _in, Connection* const _out, double const _resistance);
     void update(double const _timeStep) override;
     double getCurrent() const override;
-    ~Resistor();
+    ~Resistor() = default;
 };
 
 class Capacitor : public Component
@@ -70,6 +70,6 @@ private:
     Capacitor(std::string const _name, Connection* const _in, Connection* const _out, double const _storage, double _storedATM );
     void update(double const _timeStep) override;
     double getCurrent() const override;
-    ~Capacitor();
+    ~Capacitor() = default;
 };
 #endif

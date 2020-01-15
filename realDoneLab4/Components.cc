@@ -21,8 +21,7 @@ double Component::getVoltage() const {
     return(out->charge - in->charge);
 }
 
-Component::~Component() {
-}
+
 
 
 // BATTERY
@@ -43,8 +42,7 @@ double Battery::getVoltage() const {
     return voltage;
 }
 
-Battery::~Battery() {
-}
+
 
 
 // RESISTOR
@@ -70,8 +68,7 @@ double Resistor::getCurrent() const {
     return (getVoltage() / resistance);
 }
 
-Resistor::~Resistor() {
-}
+
 
 
 // CAPACITOR
@@ -99,5 +96,3 @@ double Capacitor::getCurrent() const {
     return storage*(getVoltage()-storedATM);
 }
 
-Capacitor::~Capacitor() {
-}
